@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ task_item.title }}{% endblock %}
+{% block content %}
+{% include 'inc/_nav.html' %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 p-5">
+            <div class="card">
+                <div class="card-header">
+                    Задача: <b>{{ task_item.title }}</b>
+                </div>
+                <div class="card-body">
+                    {{ task_item.content }}
+                </div>
+                <div class="card-footer">
+                    Дата создания: {{ task_item.created|date:"d M H:i" }}
+                </div>
+            </div>
+            <div class="back__profile">
+                <a href="{% url 'profile' %}"><button class="btn btn-primary">Вернуться назад</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

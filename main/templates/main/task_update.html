@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Изменить задание{% endblock %}
+{% block content %}
+{% include 'inc/_nav.html' %}
+{% load user_filters %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 p-5">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Изменить задание</h2>
+                </div>
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            {{ field.label }}
+                            {{ field|addclass:'form-control' }}
+                        {% endfor %}
+                        <div class="update__task">
+                            <button type="submit" class="btn btn-primary">Изменить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

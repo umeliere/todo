@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Регистрация{% endblock %}
+{% block content %}
+{% include 'inc/_profile_picture.html' %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 p-5">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Регистрация</h2>
+                </div>
+                <div class="card-body">
+                    {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+
+                        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                        <div class="is__account">
+                            Уже есть аккаунт? <a href="{% url 'user_login' %}">Вход</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

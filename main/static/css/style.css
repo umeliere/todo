@@ -1,0 +1,57 @@
+.main__container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.main__message {
+    text-align: center;
+}
+
+.errorlist {
+    color: red;
+}
+
+.is__account, .create__task, .forgot__password, .reset__button, .back__profile, .update__task {
+    margin-top: 12px;
+}
+
+a, u {
+    text-decoration: none;
+    color: #0075B2;
+}
+
+.paginator {
+    margin-top: 20px;
+}
+
+.search {
+    margin-bottom: 20px;
+}
+
+.task-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 15px;
+    border-top: 1px solid rgb(226, 226, 226);
+}
+
+.task-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.is-done {
+    color: #708090;
+}
+
+.delete-link {
+    font-size: 22px;
+}
+
+.add-task-link {
+    font-size: 30px;
+}

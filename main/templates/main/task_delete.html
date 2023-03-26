@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Удалить задание{% endblock %}
+{% block content %}
+{% include 'inc/_nav.html' %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 p-5">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Удалить задание</h2>
+                </div>
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <h5>Вы уверены, что хотите удалить задание "<b>{{ task_item.title }}</b>"?</h5>
+
+                        <div class="delete__task">
+                            <button type="submit" class="btn btn-primary">Удалить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

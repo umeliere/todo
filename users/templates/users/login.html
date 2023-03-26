@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход{% endblock %}
+{% block content %}
+{% include 'inc/_profile_picture.html' %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 p-5">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Вход</h2>
+                </div>
+                <div class="card-body">
+                    {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    <form action="{% url 'user_login' %}" method="post">
+                        {% if request.GET.next %}
+                        <div class="alert alert-info" role="alert">
+                            Вы обратились к странице, доступ к которой возможен только для авторизованных пользователей.<br>
+                            Пожалуйста, авторизуйтесь.
+                        </div>
+                        <input type="hidden" name="next" value="{{ request.GET.next }}">
+                        {% else %}
+                        <div class="alert alert-info" role="alert">
+                            Пожалуйста, авторизуйтесь.
+                        </div>
+                        {% endif %}
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">Войти</button>
+                        <div class="forgot__password">
+                            Забыли пароль? <a href="{% url 'password_reset' %}">Сбросить</a>
+                        </div>
+                        <div class="is__account">
+                            Еще нет аккаунта? <a href="{% url 'registration' %}">Зарегистрироваться</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

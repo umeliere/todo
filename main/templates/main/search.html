@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}Поиск{% endblock %}
+
+{% block content %}
+{% include 'inc/_nav.html' %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 p-5">
+            <div class="search">
+                {% include 'inc/_search.html' %}
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Задачи</h4>
+                </div>
+                {% for task in tasks %}
+                <div class="task-wrapper">
+                    {% if task.is_done %}
+                        <ul class="list-group list-group-flush">
+                            <li class="is-done list-group-item"><i><s>{{ task.title|truncatechars_html:50 }}</a><br>Дата создания задачи: {{ task.created|date:"d M H:i" }}</s></i></li>
+                        </ul>
+                        <a class="delete-link" href="{% url 'task_delete' task.pk %}">&#10539;</a>
+                    {% else %}
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a href="{{ task.get_absolute_url }}">{{ task.title|truncatechars_html:50 }}</a><br>Дата создания задачи: {{ task.created|date:"d M H:i" }}</li>
+                        </ul>
+                        <a class="delete-link" href="{% url 'task_delete' task.pk %}">&#10539;</a>
+                    {% endif %}
+                </div>
+                {% empty %}
+                <div align="center" class="p-2">
+                    <h4>Нет активных задач</h4>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="paginator">
+                <nav aria-label="nav-paginator">
+                    <ul class="pagination">
+                        {% if page_obj.has_other_pages %}
+                        {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?{{ s }}page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                        </li>
+                        {% endif %}
+
+                        {% for page_number in page_obj.paginator.page_range %}
+                            {% if page_obj.number == page_number %}
+                            <li class="page-item" aria-current="page">
+                                <a class="page-link active" href="?{{ s }}page={{ page_number }}">{{ page_number }}</a>
+                            </li>
+                            {% elif page_number > page_obj.number|add:-1 and page_number < page_obj.number|add:3 %}
+                            <li class="page-item" aria-current="page">
+                                <a class="page-link" href="?{{ s }}page={{ page_number }}">{{ page_number }}</a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?{{ s }}page={{ page_obj.next_page_number }}">Следующая</a>
+                        </li>
+                        {% endif %}
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+            <div class="back__profile">
+                <a href="{% url 'profile' %}"><button class="btn btn-primary">Вернуться назад</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
