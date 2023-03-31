@@ -22,12 +22,6 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ('username', 'password1', 'password2', 'email')
 
-    # def clean_title(self):
-    #     username = self.cleaned_data['username']
-    #     if re.match('\d', username):
-    #         raise ValidationError("Логин не должен начинаться с цифры")
-    #     return username
-
 
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(label='Имя пользователя',

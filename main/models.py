@@ -10,7 +10,7 @@ class Tasks(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
     updated = models.DateTimeField(auto_now_add=True, verbose_name="Время обновления")
     category = models.ForeignKey('Category', on_delete=models.PROTECT, blank=True, verbose_name='Категория', null=True)
-    account = models.ForeignKey(User,  on_delete=models.CASCADE, verbose_name='Пользователь', null=True, blank=True)
+    # account = models.ForeignKey(User,  on_delete=models.CASCADE, verbose_name='Пользователь', null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse_lazy('view_task', kwargs={'pk': self.pk})
@@ -25,6 +25,9 @@ class Tasks(models.Model):
 
 class Category(models.Model):
     title = models.CharField(max_length=30, db_index=True, verbose_name="Название категории")
+
+    def get_absolute_url(self):
+        return reverse_lazy('category', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.title
