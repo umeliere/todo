@@ -18,9 +18,6 @@ class ProfilePageView(ListView):
     paginate_by = 4
     model = Tasks
 
-    # def get_queryset(self):
-    #     return Tasks.objects.filter(account=self.request.user)
-
 
 class TaskView(DetailView):
     model = Tasks
