@@ -1,9 +1,11 @@
 <h1>Инструкция по установки todo...</h1>
 
 <h2>Установить к себе репозиторий:</h2>
+
 ```
 git clone https://github.com/umeliere/todo.git
 ```
+
 ---
 
 <h4>Создать файл .env в папке todo/todo(где находится файл settings.py)<br>
