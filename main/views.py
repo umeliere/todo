@@ -12,25 +12,6 @@ def home(request):
     return render(request, 'main/home.html')
 
 
-@login_required()
-def feedback(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            mail = send_mail(f"{form.cleaned_data['subject']} от {form.cleaned_data['email']}",
-                             form.cleaned_data['content'], 'umeliere.answer@yandex.ru', ['umeliere@yandex.ru'])
-            if mail:
-                messages.success(request, 'Письмо успешно отправлено')
-                return redirect('feedback')
-            else:
-                form.add_error('__all__', 'Ошибка отправки письма')
-        else:
-            form.add_error('__all__', 'Ошибка валидации')
-    else:
-        form = ContactForm()
-    return render(request, 'main/feedback.html', {'form': form})
-
-
 class ProfilePageView(ListView):
     template_name = 'main/profile.html'
     context_object_name = 'tasks'
@@ -93,3 +74,22 @@ class CategoryView(ListView):
 
     def get_queryset(self):
         return Tasks.objects.filter(category_id=self.kwargs['pk'])
+
+
+@login_required()
+def feedback(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            mail = send_mail(f"{form.cleaned_data['subject']} от {form.cleaned_data['email']}",
+                             form.cleaned_data['content'], 'email_host_user', ['personal mail'])
+            if mail:
+                messages.success(request, 'Письмо успешно отправлено')
+                return redirect('feedback')
+            else:
+                form.add_error('__all__', 'Ошибка отправки письма')
+        else:
+            form.add_error('__all__', 'Ошибка валидации')
+    else:
+        form = ContactForm()
+    return render(request, 'main/feedback.html', {'form': form})
