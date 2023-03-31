@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load task_tags %}
 
 {% block title %}Профиль{% endblock %}
 
@@ -15,6 +16,17 @@
                 <div class="card-header">
                     <div class="task-header">
                         <h4>Задачи</h4>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Категории
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% get_categories as categories %}
+                            {% for item in categories %}
+                            <li><a class="dropdown-item" href="{% url 'category' item.pk %}">{{ item.title }}</a></li>
+                            {% endfor %}
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'add_category' %}">Создать свою категорию</a></li>
+                        </ul>
                         <a class="add-task-link" href="{% url 'add_task' %}">&#43;</a>
                     </div>
                 </div>

@@ -54,7 +54,7 @@ class TaskCreateView(CreateView):
 
 class TaskUpdateView(UpdateView):
     model = Tasks
-    fields = ['title', 'content', 'category']
+    form_class = TaskUpdateForm
     template_name = 'main/task_update.html'
 
 
@@ -78,3 +78,18 @@ class SearchView(ListView):
         context = super().get_context_data(**kwargs)
         context['s'] = f"s={self.request.GET.get('s')}&"
         return context
+
+
+class CategoryCreateView(CreateView):
+    form_class = CategoryForm
+    template_name = 'main/add_category.html'
+    success_url = '/profile'
+
+
+class CategoryView(ListView):
+    template_name = 'main/profile.html'
+    context_object_name = 'tasks'
+    paginate_by = 4
+
+    def get_queryset(self):
+        return Tasks.objects.filter(category_id=self.kwargs['pk'])

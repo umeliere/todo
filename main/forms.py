@@ -1,7 +1,5 @@
 from django import forms
 from .models import *
-import re
-from django.core.exceptions import ValidationError
 
 
 class TaskForm(forms.ModelForm):
@@ -12,6 +10,22 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Tasks
         fields = ['title', 'content', 'category']
+
+
+class TaskUpdateForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['category'].empty_label = "Не выбрано"
+
+    class Meta:
+        model = Tasks
+        fields = ['title', 'content', 'category', 'is_done']
+
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['title']
 
 
 class ContactForm(forms.Form):

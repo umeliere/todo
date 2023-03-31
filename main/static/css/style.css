@@ -13,7 +13,7 @@
     color: red;
 }
 
-.is__account, .create__task, .forgot__password, .reset__button, .back__profile, .update__task {
+.is__account, .create__task, .forgot__password, .reset__button, .update__task {
     margin-top: 12px;
 }
 
@@ -54,4 +54,11 @@ a, u {
 
 .add-task-link {
     font-size: 30px;
+}
+
+.back__profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
 }
