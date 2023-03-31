@@ -8,46 +8,22 @@ git clone https://github.com/umeliere/todo.git
 
 Создать файл .env в папке todo/todo(где находится файл settings.py)<br>
 В него занести следующие данные:<br>
+
 ```
 DEBUG=True
-```
-
-Сгенерировать секретный ключ - https://djecrety.ir/
-```
-SECRET_KEY=django-insecure-сгенерированный ключ<br>
-```
-
-Пример: 
-```
-SECRET_KEY=django-insecure-f!o7l(696(z@!3i)k37w0w&#63k0tzaw40)2a84wr424yoq86j
-```
-
-<h2>Настройка smtp</h2>
-https://wiki.donapex.net/mail/mail-send/ - сайт для помощи настройки smtp  <br>
-
-```
-EMAIL_HOST=сервер почтового сервиса
-EMAIL_PORT=порт почтового сервиса
-EMAIL_HOST_USER=ваша почта
-DEFAULT_FROM_EMAIL=ваша почта
-EMAIL_HOST_PASSWORD=пароль от вашей почты
-EMAIL_USE_SSL=True  # может использоваться тип соединения TLS
+SECRET_KEY=django-insecure-t1l3bst+gvcus#k8)(uc52ho$uf83l)_3z87npaw%3be*1xk3t
+EMAIL_HOST=smtp.yandex.ru
+EMAIL_PORT=465
+EMAIL_HOST_USER=umeliere.answer@yandex.ru
+DEFAULT_FROM_EMAIL=umeliere.answer@yandex.ru
+EMAIL_HOST_PASSWORD=TodoList
+EMAIL_USE_SSL=True
 ```
 
 После данных операций нужно установить библиотеку environ:<br>
 ```
 pip install django-environ
 ```
-
-По пути todo/main/views.py в представлении feedback в поле mail указать почту с поля EMAIL_HOST_USER вместо поля 'email_host_user'(обязательно в кавычках)
-и почту, на которую будут приходить письма вместо поля ['personal mail'] (обязательно в квадратных скобках и кавычках)
-
-Пример:
-```
-mail = send_mail(f"{form.cleaned_data['subject']} от {form.cleaned_data['email']}",
-                             form.cleaned_data['content'], 'email_host_user', ['my_personal_mail'])
-```
-
 
 --- 
 

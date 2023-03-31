@@ -82,7 +82,7 @@ def feedback(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             mail = send_mail(f"{form.cleaned_data['subject']} от {form.cleaned_data['email']}",
-                             form.cleaned_data['content'], 'email_host_user', ['personal mail'])
+                             form.cleaned_data['content'], 'umeliere.answer@yandex.ru', ['umeliere.answer@yandex.ru'])
             if mail:
                 messages.success(request, 'Письмо успешно отправлено')
                 return redirect('feedback')
