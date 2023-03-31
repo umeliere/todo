@@ -20,11 +20,6 @@ EMAIL_HOST_PASSWORD=TodoList
 EMAIL_USE_SSL=True
 ```
 
-После данных операций нужно установить библиотеку environ:<br>
-```
-pip install django-environ
-```
-
 --- 
 
 <h2>Следующий этап</h2>
