@@ -22,6 +22,9 @@ EMAIL_HOST_PASSWORD=TodoList
 EMAIL_USE_SSL=True
 ```
 
+По умолчанию, почта на которую приходят письма: umeliere.answer@yandex.ru.<br> Вы можете изменить ее по пути: 
+todo/main/views.py в представлении feedback.<br> Замените ['umeliere.answer@yandex.ru'] на нужную вам почту.
+
 --- 
 
 <h2>Последнии шаги</h2>
