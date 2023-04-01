@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "debug_toolbar",
     'main',
 ]
 
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'todo.middleware.hide_admin.RestrictStaffToAdminMiddleware',
 ]
 
@@ -138,6 +140,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Link for @login_required
 LOGIN_URL = 'user_login'
+
+
+# debug-toolbar
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 
 # Connecting to smtp
