@@ -17,6 +17,10 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf import settings
 from django.views.generic import RedirectView
+from django.conf.urls import handler404, handler500
+
+handler404 = "main.views.page_not_found"  # noqa
+handler500 = "main.views.server_error"  # noqa
 
 urlpatterns = [
     path('admin/', admin.site.urls),
