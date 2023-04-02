@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from .forms import *
 from .models import *
@@ -10,6 +10,25 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 def home(request):
     return render(request, 'main/home.html')
+
+
+@login_required()
+def feedback(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            mail = send_mail(f"{form.cleaned_data['subject']} от {form.cleaned_data['email']}",
+                             form.cleaned_data['content'], 'umeliere.answer@yandex.ru', ['umeliere.answer@yandex.ru'])
+            if mail:
+                messages.success(request, 'Письмо успешно отправлено')
+                return redirect('feedback')
+            else:
+                form.add_error('__all__', 'Ошибка отправки письма')
+        else:
+            form.add_error('__all__', 'Ошибка валидации')
+    else:
+        form = ContactForm()
+    return render(request, 'main/feedback.html', {'form': form})
 
 
 class ProfilePageView(ListView):
@@ -73,20 +92,14 @@ class CategoryView(ListView):
         return Tasks.objects.filter(category_id=self.kwargs['pk'])
 
 
-@login_required()
-def feedback(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            mail = send_mail(f"{form.cleaned_data['subject']} от {form.cleaned_data['email']}",
-                             form.cleaned_data['content'], 'umeliere.answer@yandex.ru', ['umeliere.answer@yandex.ru'])
-            if mail:
-                messages.success(request, 'Письмо успешно отправлено')
-                return redirect('feedback')
-            else:
-                form.add_error('__all__', 'Ошибка отправки письма')
-        else:
-            form.add_error('__all__', 'Ошибка валидации')
-    else:
-        form = ContactForm()
-    return render(request, 'main/feedback.html', {'form': form})
+def page_not_found(request, exception):
+    return render(
+        request,
+        "misc/404.html",
+        {"path": request.path},
+        status=404
+    )
+
+
+def server_error(request):
+    return render(request, "misc/500.html", status=500)
