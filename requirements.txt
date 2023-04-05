@@ -1,3 +1,4 @@
 Django==4
 django-environ==0.10.0
+djangorestframework==3.14.0
 django-debug-toolbar
