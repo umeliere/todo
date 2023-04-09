@@ -22,7 +22,9 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {% get_categories as categories %}
                             {% for item in categories %}
-                            <li><a class="dropdown-item" href="{% url 'category' item.pk %}">{{ item.title }}</a></li>
+                                {% if request.user == item.user %}
+                                <li><a class="dropdown-item" href="{% url 'category' item.pk %}">{{ item.title }}</a></li>
+                                {% endif %}
                             {% endfor %}
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{% url 'add_category' %}">Создать свою категорию</a></li>

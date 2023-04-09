@@ -27,6 +27,8 @@ urlpatterns = [
     path('', include('main.urls')),
     path("users/", include("users.urls")),
     path("users/", include("django.contrib.auth.urls")),
+    path("api/", include("api.urls")),
+    path('api-auth/', include('rest_framework.urls')),
     re_path(r'^favicon\.ico$', RedirectView.as_view(url='/static/img/favicon.ico', permanent=True)),
 ]
 

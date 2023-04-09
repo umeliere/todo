@@ -37,22 +37,40 @@ class ProfilePageView(ListView):
     paginate_by = 4
     model = Tasks
 
+    def get_queryset(self):
+        return Tasks.objects.filter(user=self.request.user)
+
 
 class TaskView(DetailView):
     model = Tasks
     template_name = 'main/task_detail.html'
     context_object_name = 'task_item'
 
+    def get_queryset(self):
+        return super(TaskView, self).get_queryset(
+        ).filter(user=self.request.user)
+
 
 class TaskCreateView(CreateView):
     form_class = TaskForm
     template_name = 'main/add_task.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(TaskCreateView, self).form_valid(form)
+
+    def get_queryset(self):
+        return Tasks.objects.filter(user=self.request.user)
 
 
 class TaskUpdateView(UpdateView):
     model = Tasks
     form_class = TaskUpdateForm
     template_name = 'main/task_update.html'
+
+    def get_queryset(self):
+        return super(TaskUpdateView, self).get_queryset(
+        ).filter(user=self.request.user)
 
 
 class TaskDeleteView(DeleteView):
@@ -62,6 +80,10 @@ class TaskDeleteView(DeleteView):
     context_object_name = 'task_item'
     success_url = '/profile/'
 
+    def get_queryset(self):
+        return super(TaskDeleteView, self).get_queryset(
+        ).filter(user=self.request.user)
+
 
 class SearchView(ListView):
     template_name = 'main/search.html'
@@ -69,7 +91,7 @@ class SearchView(ListView):
     paginate_by = 4
 
     def get_queryset(self):
-        return Tasks.objects.filter(title__icontains=self.request.GET.get('s'))
+        return Tasks.objects.filter(title__icontains=self.request.GET.get('s'), user=self.request.user)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -82,6 +104,10 @@ class CategoryCreateView(CreateView):
     template_name = 'main/add_category.html'
     success_url = '/profile'
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(CategoryCreateView, self).form_valid(form)
+
 
 class CategoryView(ListView):
     template_name = 'main/profile.html'
@@ -89,7 +115,7 @@ class CategoryView(ListView):
     paginate_by = 4
 
     def get_queryset(self):
-        return Tasks.objects.filter(category_id=self.kwargs['pk'])
+        return Tasks.objects.filter(category_id=self.kwargs['pk'], user=self.request.user)
 
 
 def page_not_found(request, exception):
