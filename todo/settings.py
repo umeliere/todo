@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "debug_toolbar",
     'main',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -155,3 +156,19 @@ EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = env('EMAIL_USE_SSL')
+
+
+# django rest(api) framework
+REST_FRAMEWORK = {
+        # pagination
+        'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+        'PAGE_SIZE': 100,
+
+        # protection against throttling
+        'DEFAULT_THROTTLE_CLASSES': [
+            'rest_framework.throttling.ScopedRateThrottle',
+        ],
+        'DEFAULT_THROTTLE_RATES': {
+            'low_request': '120/minute',
+        }
+}

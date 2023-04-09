@@ -5,6 +5,7 @@ from .models import *
 class TaskForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        # self.fields['category'].queryset = Tasks.objects.filter(category__category__user=self.request.user)
         self.fields['category'].empty_label = "Не выбрано"
 
     class Meta:
