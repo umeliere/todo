@@ -51,4 +51,10 @@ python3 manage.py createsuperuser
 python3 manage.py runserver
 ```
 
+---
+<h3>Работа с API</h3>
+
+Вы можете начать работу с API по <a href="http://127.0.0.1:8000/api/">ссылке</a>
+
+---
 
