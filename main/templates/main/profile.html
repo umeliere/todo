@@ -34,14 +34,20 @@
                 </div>
                 {% for task in tasks %}
                 <div class="task-wrapper">
+                    <div class="is__done__checkbox">
+                        <form method="post" action="{% url 'done' task.pk %}">
+                        {% csrf_token %}
+                        <input type="checkbox" name="is_done" onchange="this.form.submit()" {% if task.is_done %} checked {% endif %}>
+                        </form>
+                    </div>
                     {% if task.is_done %}
                         <ul class="list-group list-group-flush">
-                            <li class="is-done list-group-item"><i><s>{{ task.title|truncatechars_html:50 }}</a><br>Дата создания задачи: {{ task.created|date:"d M H:i" }}</s></i></li>
+                            <li class="is-done list-group-item"><i><s>{{ task.title|truncatechars_html:25 }}</a><br>Дата создания задачи: {{ task.created|date:"d M H:i" }}</s></i></li>
                         </ul>
                         <a class="delete-link" href="{% url 'task_delete' task.pk %}">&#10539;</a>
                     {% else %}
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><a href="{{ task.get_absolute_url }}">{{ task.title|truncatechars_html:50 }}</a><br>Дата создания задачи: {{ task.created|date:"d M H:i" }}</li>
+                            <li class="list-group-item"><a href="{{ task.get_absolute_url }}">{{ task.title|truncatechars_html:25 }}</a><br>Дата создания задачи: {{ task.created|date:"d M H:i" }}</li>
                         </ul>
                         <a class="delete-link" href="{% url 'task_delete' task.pk %}">&#10539;</a>
                     {% endif %}
