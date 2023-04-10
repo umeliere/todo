@@ -37,18 +37,18 @@ pip install -r requirements.txt
 
 Произвести миграции:
 ```
-python3 manage.py makemigrations
-python3 manage.py migrate
+python manage.py makemigrations
+python manage.py migrate
 ```
 
 Создать суперпользователя:
 ```
-python3 manage.py createsuperuser
+python manage.py createsuperuser
 ```
 
 Запустить сервер(по умолчанию http://localhost:8000):
 ```
-python3 manage.py runserver
+python manage.py runserver
 ```
 
 ---
