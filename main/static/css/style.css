@@ -13,7 +13,7 @@
     color: red;
 }
 
-.is__account, .create__task, .forgot__password, .reset__button, .update__task {
+.is__account, .create__task, .forgot__password, .reset__button {
     margin-top: 12px;
 }
 
