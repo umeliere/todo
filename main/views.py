@@ -62,6 +62,11 @@ class TaskCreateView(CreateView):
     def get_queryset(self):
         return Tasks.objects.filter(user=self.request.user)
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
 
 class TaskUpdateView(UpdateView):
     model = Tasks
@@ -71,6 +76,11 @@ class TaskUpdateView(UpdateView):
     def get_queryset(self):
         return super(TaskUpdateView, self).get_queryset(
         ).filter(user=self.request.user)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
 
 
 class TaskDeleteView(DeleteView):
