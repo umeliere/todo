@@ -23,7 +23,7 @@ class TaskUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Tasks
-        fields = ['title', 'content', 'category', 'is_done']
+        fields = ['title', 'content', 'category']
 
 
 class CategoryForm(forms.ModelForm):

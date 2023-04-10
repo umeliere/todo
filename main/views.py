@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from .forms import *
 from .models import *
@@ -81,6 +81,7 @@ class TaskUpdateView(UpdateView):
         kwargs = super().get_form_kwargs()
         kwargs.update({'user': self.request.user})
         return kwargs
+
 
 
 def done(request, pk):
