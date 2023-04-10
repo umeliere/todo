@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from .forms import *
 from .models import *
@@ -81,6 +81,17 @@ class TaskUpdateView(UpdateView):
         kwargs = super().get_form_kwargs()
         kwargs.update({'user': self.request.user})
         return kwargs
+
+
+def done(request, pk):
+    task = Tasks.objects.get(pk=pk)
+    is_done = request.POST.get('is_done', False)
+    if is_done == 'on':
+        is_done = True
+
+    task.is_done = is_done
+    task.save()
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 class TaskDeleteView(DeleteView):
