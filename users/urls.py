@@ -2,6 +2,7 @@ from django.urls import re_path, path
 from django.contrib.auth import views
 from .views import *
 
+
 urlpatterns = [
     re_path(r'^registration/', registration, name='registration'),
     re_path(r'^login/', user_login, name='user_login'),
