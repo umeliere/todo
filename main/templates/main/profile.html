@@ -22,7 +22,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {% get_categories as categories %}
                             {% for item in categories %}
-                                {% if request.user == item.user or item.user.is_staff %}
+                                {% if request.user == item.user%}
                                 <li><a class="dropdown-item" href="{% url 'category' item.pk %}">{{ item.title }}</a></li>
                                 {% endif %}
                             {% endfor %}
