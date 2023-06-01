@@ -8,7 +8,7 @@ class Tasks(models.Model):
     content = models.TextField(verbose_name="Описание задачи")
     is_done = models.BooleanField(verbose_name='Выполнено?', default=False)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
-    updated = models.DateTimeField(auto_now_add=True, verbose_name="Время обновления")
+    updated = models.DateField(auto_now=True, verbose_name="Время обновления")
     category = models.ForeignKey('Category', on_delete=models.PROTECT, blank=True, verbose_name='Категория', null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="creator", editable=False)
 
@@ -24,7 +24,7 @@ class Tasks(models.Model):
 
 
 class Category(models.Model):
-    title = models.CharField(max_length=30, db_index=True, verbose_name="Название категории")
+    title = models.CharField(max_length=30, verbose_name="Название категории")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="category_creator", editable=False)
 
     def get_absolute_url(self):

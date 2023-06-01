@@ -94,7 +94,7 @@ def done(request, pk):
         task.save()
         return redirect(request.META.get('HTTP_REFERER'))
     else:
-        return redirect('/formerror')
+        return reverse_lazy('formerror')
 
 
 class TaskDeleteView(DeleteView):
@@ -126,7 +126,7 @@ class SearchView(ListView):
 class CategoryCreateView(CreateView):
     form_class = CategoryForm
     template_name = 'main/add_category.html'
-    success_url = '/profile'
+    success_url = reverse_lazy('profile')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
