@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
-from .forms import *
+from users.forms import UserRegisterForm, UserLoginForm
 from django.contrib.auth import login, logout, authenticate
 
 
 def registration(request):
+    """
+    Представление регистрации
+    """
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
@@ -21,6 +24,9 @@ def registration(request):
 
 
 def user_login(request):
+    """
+    Представление входа для пользователя
+    """
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
@@ -38,5 +44,8 @@ def user_login(request):
 
 
 def user_logout(request):
+    """
+    Представление выхода для пользователя
+    """
     logout(request)
     return redirect('home')

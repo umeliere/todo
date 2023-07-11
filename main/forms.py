@@ -1,8 +1,11 @@
 from django import forms
-from .models import *
+from main.models import Category, Tasks
 
 
 class TaskForm(forms.ModelForm):
+    """
+    Форма для создания задания
+    """
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
@@ -15,6 +18,9 @@ class TaskForm(forms.ModelForm):
 
 
 class TaskUpdateForm(forms.ModelForm):
+    """
+    Форма для обновления задания
+    """
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
@@ -27,12 +33,18 @@ class TaskUpdateForm(forms.ModelForm):
 
 
 class CategoryForm(forms.ModelForm):
+    """
+    Форма для создания категории
+    """
     class Meta:
         model = Category
         fields = ['title']
 
 
 class ContactForm(forms.Form):
+    """
+    Форма для обратной связи
+    """
     subject = forms.CharField(label='Заголовок', widget=forms.TextInput(attrs={
         'class': 'form-control'
     }))
@@ -42,5 +54,3 @@ class ContactForm(forms.Form):
     content = forms.CharField(label='Обращение', widget=forms.Textarea(attrs={
         'class': 'form-control', 'rows': 8
     }))
-
-
