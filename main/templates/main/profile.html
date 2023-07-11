@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
-{% load task_tags %}
 
-{% block title %}Профиль{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block content %}
+{% load task_tags %}
 {% include 'inc/_nav.html' %}
 
 <div class="container">
