@@ -1,7 +1,6 @@
 from django.urls import path
 from main.views import (
     home,
-    feedback,
     ProfilePageView,
     TaskView,
     TaskCreateView,
@@ -16,7 +15,6 @@ from main.views import (
 
 urlpatterns = [
     path('', home, name='home'),
-    path('feedback/', feedback, name='feedback'),
     path('profile/', ProfilePageView.as_view(), name='profile'),
     path('profile/task/<int:pk>/', TaskView.as_view(), name='view_task'),
     path('profile/add_task/', TaskCreateView.as_view(), name='add_task'),

@@ -40,17 +40,3 @@ class CategoryForm(forms.ModelForm):
         model = Category
         fields = ['title']
 
-
-class ContactForm(forms.Form):
-    """
-    Форма для обратной связи
-    """
-    subject = forms.CharField(label='Заголовок', widget=forms.TextInput(attrs={
-        'class': 'form-control'
-    }))
-    email = forms.EmailField(label='Ваша почта', widget=forms.EmailInput(attrs={
-        'class': 'form-control'
-    }))
-    content = forms.CharField(label='Обращение', widget=forms.Textarea(attrs={
-        'class': 'form-control', 'rows': 8
-    }))

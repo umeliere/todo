@@ -2,38 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from main.forms import ContactForm, TaskForm, TaskUpdateForm, CategoryForm
+from main.forms import TaskForm, TaskUpdateForm, CategoryForm
 from main.models import Tasks
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.core.mail import send_mail
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 def home(request):
     return render(request, 'main/home.html')
-
-
-@login_required()
-def feedback(request):
-    """
-    Представление для обратной связи пользователя
-    """
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            mail = send_mail(f"{form.cleaned_data['subject']} от {form.cleaned_data['email']}",
-                             form.cleaned_data['content'], 'umeliere.answer@yandex.ru', ['umeliere.answer@yandex.ru'])
-            if mail:
-                messages.success(request, 'Письмо успешно отправлено')
-                return redirect('feedback')
-            else:
-                form.add_error('__all__', 'Ошибка отправки письма')
-        else:
-            form.add_error('__all__', 'Ошибка валидации')
-    else:
-        form = ContactForm()
-    return render(request, 'main/feedback.html', {'form': form})
 
 
 class ProfilePageView(LoginRequiredMixin, ListView):

@@ -17,9 +17,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'add_category' %}">Добавить категорию</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'feedback' %}">Обратная связь | Предложения</a>
-                </li>
             </ul>
             {% if request.user.is_authenticated %}
             <span class="navbar-text">
