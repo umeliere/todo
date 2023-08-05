@@ -9,6 +9,9 @@ from api.service import TaskFilter, TasksApiPagination
 
 
 class TasksViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet for the model Tasks
+    """
     queryset = Tasks.objects.all()
     serializer_class = TasksSerializer
     permission_classes = [IsOwnerOrReadOnly, IsAuthenticatedOrReadOnly]
@@ -18,6 +21,9 @@ class TasksViewSet(viewsets.ModelViewSet):
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet for the model Category
+    """
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [IsOwnerOrReadOnly, IsAuthenticatedOrReadOnly]

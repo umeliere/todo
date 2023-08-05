@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 
 class Tasks(models.Model):
     """
-    Модель задания
+    Model for the tasks
     """
     title = models.CharField(max_length=75, verbose_name="Заголовок")
     content = models.TextField(verbose_name="Описание задачи")
@@ -28,7 +28,7 @@ class Tasks(models.Model):
 
 class Category(models.Model):
     """
-    Модель категории к заданию
+    Model for the categories
     """
     title = models.CharField(max_length=30, verbose_name="Название категории")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="category_creator", editable=False)

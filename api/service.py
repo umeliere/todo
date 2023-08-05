@@ -14,7 +14,7 @@ class CharFilterInFilter(BaseInFilter, CharFilter):
 
 class TasksApiPagination(PageNumberPagination):
     """
-    Modified pagination class for Product model
+    Modified pagination class for Tasks model
     """
     page_size = 4
 

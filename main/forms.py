@@ -4,7 +4,7 @@ from main.models import Category, Tasks
 
 class TaskForm(forms.ModelForm):
     """
-    Форма для создания задания
+    Create the task form
     """
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
@@ -19,7 +19,7 @@ class TaskForm(forms.ModelForm):
 
 class TaskUpdateForm(forms.ModelForm):
     """
-    Форма для обновления задания
+    Update the task form
     """
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
@@ -34,7 +34,7 @@ class TaskUpdateForm(forms.ModelForm):
 
 class CategoryForm(forms.ModelForm):
     """
-    Форма для создания категории
+    Create the category form
     """
     class Meta:
         model = Category

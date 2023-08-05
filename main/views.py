@@ -10,12 +10,15 @@ from django.utils.decorators import method_decorator
 
 
 def home(request):
+    """
+    Get the start page
+    """
     return render(request, 'main/home.html')
 
 
 class ProfilePageView(LoginRequiredMixin, ListView):
     """
-    Представление для предоставления задач пользователя
+    The view for the tasks of the user
     """
     template_name = 'main/profile.html'
     context_object_name = 'tasks'
@@ -33,7 +36,7 @@ class ProfilePageView(LoginRequiredMixin, ListView):
 
 class TaskView(LoginRequiredMixin, DetailView):
     """
-    Представление для создания задачи
+    The detail task view
     """
     model = Tasks
     template_name = 'main/task_detail.html'
@@ -51,7 +54,7 @@ class TaskView(LoginRequiredMixin, DetailView):
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
     """
-    Представление для создания задачи
+    Create the task view
     """
     form_class = TaskForm
     template_name = 'main/add_task.html'
@@ -76,7 +79,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
     """
-    Представление для обновления задачи
+    Update the task view
     """
     model = Tasks
     form_class = TaskUpdateForm
@@ -99,6 +102,9 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
 
 @method_decorator(require_POST, name='dispatch')
 class IsDoneView(UpdateView):
+    """
+    If the task is done: it is not active, else it is active
+    """
     model = Tasks
     template_name = 'main/profile.html '
     fields = ('is_done',)
@@ -107,7 +113,7 @@ class IsDoneView(UpdateView):
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
     """
-    Представление удаления задачи
+    Delete the task view
     """
     model = Tasks
     fields = ['title', 'content', 'category']
@@ -127,7 +133,7 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
 
 class SearchView(LoginRequiredMixin, ListView):
     """
-    Представление страницы после поиска
+    The task search view
     """
     template_name = 'main/search.html'
     context_object_name = 'tasks'
@@ -150,7 +156,7 @@ class SearchView(LoginRequiredMixin, ListView):
 
 class CategoryCreateView(LoginRequiredMixin, CreateView):
     """
-    Представление для создания категории
+    Create the category view
     """
     form_class = CategoryForm
     template_name = 'main/add_category.html'
@@ -168,7 +174,7 @@ class CategoryCreateView(LoginRequiredMixin, CreateView):
 
 class CategoryView(LoginRequiredMixin, ListView):
     """
-    Представление страницы по определенной категории
+    The tasks filtered by the category view
     """
     template_name = 'main/profile.html'
     context_object_name = 'tasks'
@@ -185,7 +191,7 @@ class CategoryView(LoginRequiredMixin, ListView):
 
 def page_not_found(request, exception):
     """
-    Представление ошибки 404
+    404 error view
     """
     return render(
         request,
@@ -197,6 +203,6 @@ def page_not_found(request, exception):
 
 def server_error(request):
     """
-    Представление ошибки 500
+    500 error view
     """
     return render(request, "misc/500.html", status=500)

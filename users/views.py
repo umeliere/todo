@@ -5,7 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 
 def registration(request):
     """
-    Представление регистрации
+    Registration view
     """
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -25,7 +25,7 @@ def registration(request):
 
 def user_login(request):
     """
-    Представление входа для пользователя
+    Login view
     """
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
@@ -45,7 +45,7 @@ def user_login(request):
 
 def user_logout(request):
     """
-    Представление выхода для пользователя
+    Logout view
     """
     logout(request)
     return redirect('home')

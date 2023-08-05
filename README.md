@@ -1,9 +1,9 @@
-<h1>Инструкция по установки a simple-store</h1>
+<h1>Инструкция по установки ToDo</h1>
 
 <h2>Установить к себе репозиторий:</h2>
 
 ```
-git clone https://github.com/umeliere/store.git
+https://github.com/umeliere/todo.git
 ```
 
 ---
@@ -29,20 +29,24 @@ RECAPTCHA_PRIVATE_KEY=XXXXX
 <h3>Вам нужно подключить YANDEX smtp, ДОКУМЕНТАЦИЯ:</h3>
 http://help.yandex.ru/mail/mail-clients.xml
 <p>И заполнить поля:</p>
-<p>EMAIL_HOST=XXXXX</p>
-<p>EMAIL_PORT=XXXXX</p>
-<p>EMAIL_HOST_USER=XXXXX</p>
-<p>DEFAULT_FROM_EMAIL=XXXXX</p>
-<p>EMAIL_HOST_PASSWORD=XXXXX</p>
-<p>EMAIL_USE_SSL=XXXXX</p>
-<p>Если вы не хотите пользоваться yandex smpt, вы всегда можете сменить на любой удобный почтовый сервис</p>
+
+```
+EMAIL_HOST=XXXXX
+EMAIL_PORT=XXXXX
+EMAIL_HOST_USER=XXXXX
+DEFAULT_FROM_EMAIL=XXXXX
+EMAIL_HOST_PASSWORD=XXXXX
+EMAIL_USE_SSL=XXXXX
+```
+
+Если вы не хотите пользоваться yandex smpt, вы всегда можете сменить на любой удобный почтовый сервис</p>
 
 https://docs.djangoproject.com/en/4.2/topics/email/  -- Документация
 
 ---
 <h2>Последнии шаги</h2>
 
-Установить django командой(версия Python >= 3.8, django=4.21):
+Установить django командой(версия Python >= 3.8, django=4.0):
 
 ```
 pip install -r requirements.txt
@@ -70,5 +74,8 @@ python manage.py runserver
 
 Был добавлен middleware, запрещающий вход пользователям, не являющимися сотрудниками.<br>
 Вам нужно войти как <b>superuser</b> и после этого будет открыта админ-панель django.
+
+---
+<h3>Документация к API доступна по ссылке: http://127.0.0.1:8000/swagger/ </h3>
 
 ---
