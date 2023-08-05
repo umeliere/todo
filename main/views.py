@@ -1,10 +1,12 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from main.forms import TaskForm, TaskUpdateForm, CategoryForm
-from main.models import Tasks
+from main.models import Tasks, Category
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.decorators.http import require_POST
+from django.utils.decorators import method_decorator
 
 
 def home(request):
@@ -95,21 +97,12 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
         return kwargs
 
 
-def done(request, pk):
-    """
-    Представление для отображения статуса задачи
-    """
-    if request.method == "POST":
-        task = get_object_or_404(Tasks, pk=pk)
-        is_done = request.POST.get('is_done', False)
-        if is_done == 'on':
-            is_done = True
-
-        task.is_done = is_done
-        task.save()
-        return redirect(request.META.get('HTTP_REFERER'))
-    else:
-        return reverse_lazy('formerror')
+@method_decorator(require_POST, name='dispatch')
+class IsDoneView(UpdateView):
+    model = Tasks
+    template_name = 'main/profile.html '
+    fields = ('is_done',)
+    success_url = reverse_lazy('profile')
 
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
@@ -178,7 +171,7 @@ class CategoryView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
-        context['title'] = self.request.title
+        context['title'] = Category.objects.get(pk=self.kwargs['pk'])
         return context
 
     def get_queryset(self):
