@@ -3,12 +3,12 @@
 <h2>Установить к себе репозиторий:</h2>
 
 ```
-https://github.com/umeliere/todo.git
+git clone https://github.com/umeliere/todo.git
 ```
 
 ---
 
-<h4>Создать файл .env в папке store/core(где находится файл settings.py)<br>
+<h4>Создать файл .env в папке todo/todo(где находится файл settings.py)<br>
 В него занести следующие данные:<br></h4>
 
 ```
@@ -21,9 +21,6 @@ EMAIL_HOST_USER=XXXXX
 DEFAULT_FROM_EMAIL=XXXXX
 EMAIL_HOST_PASSWORD=XXXXX
 EMAIL_USE_SSL=XXXXX
-
-RECAPTCHA_PUBLIC_KEY=XXXXX
-RECAPTCHA_PRIVATE_KEY=XXXXX
 ```
 ---
 <h3>Вам нужно подключить YANDEX smtp, ДОКУМЕНТАЦИЯ:</h3>
