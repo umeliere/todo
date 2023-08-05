@@ -1,12 +1,10 @@
-from django.contrib.auth.models import User
 from rest_framework import serializers
 from main.models import Tasks, Category
 
 
 class TasksSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(
-        default=serializers.CurrentUserDefault(),
-    )
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    category = serializers.SlugRelatedField(slug_field='title', read_only=True)
 
     class Meta:
         model = Tasks
@@ -21,10 +19,3 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ['id', 'title', 'user']
-
-
-class UserSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = User
-        fields = ['id', 'username', 'email', 'date_joined']

@@ -18,6 +18,7 @@ from django.urls import path, include, re_path
 from django.conf import settings
 from django.views.generic import RedirectView
 from django.conf.urls import handler404, handler500
+from todo.yasg import urlpatterns as docs
 
 handler404 = "main.views.page_not_found"  # noqa
 handler500 = "main.views.server_error"  # noqa
@@ -27,10 +28,10 @@ urlpatterns = [
     path('', include('main.urls')),
     path("users/", include("users.urls")),
     path("users/", include("django.contrib.auth.urls")),
-    path("api/", include("api.urls")),
+    path("api/v1/", include("api.urls")),
     path('api-auth/', include('rest_framework.urls')),
     re_path(r'^favicon\.ico$', RedirectView.as_view(url='/static/img/favicon.ico', permanent=True)),
-]
+] + docs
 
 if settings.DEBUG:
     import debug_toolbar
